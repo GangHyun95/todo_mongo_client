@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 const ListItem = React.memo(({ item, todoData, setTodoData, deleteClick }) => {
   // console.log("ListItem Rendering...");
 
@@ -36,10 +36,22 @@ const ListItem = React.memo(({ item, todoData, setTodoData, deleteClick }) => {
       }
       return item;
     });
+    let body = {
+      id: todoId,
+      completed: item.completed,
+    };
     // axios 를 통해 MongoDB complete 업데이트
-    setTodoData(updateTodo);
+    // then() : 서버에서 회신(응답)이 왔을때 처리
+    // catch() : 서버에서 응답없을 때
+    axios
+      .post("/api/post/updatetoggle", body)
+      .then((res) => {
+        // console.log(res);
+        setTodoData(updateTodo);
+      })
+      .catch((err) => console.log(err));
     // 로컬에 저장(DB 저장)
-    localStorage.setItem("todoData2", JSON.stringify(updateTodo));
+    // localStorage.setItem("todoData2", JSON.stringify(updateTodo));
   };
 
   // 현재 item.id 에 해당하는 것만 업데이트한다.
@@ -63,10 +75,20 @@ const ListItem = React.memo(({ item, todoData, setTodoData, deleteClick }) => {
     });
     // 데이터 갱신
     // axios 를 이용해서 MongoDB 타이틀 업데이트
-    setTodoData(tempTodo);
-    localStorage.setItem("todoData2", JSON.stringify(tempTodo));
-    // 목록창으로 이동
-    setIsEditing(false);
+    let body = {
+      id: todoId,
+      title: item.title,
+    };
+    axios
+      .post("/api/post/updatetitle", body)
+      .then((res) => {
+        setTodoData(tempTodo);
+        // 목록창으로 이동
+        setIsEditing(false);
+      })
+      .catch(console.err);
+
+    // localStorage.setItem("todoData2", JSON.stringify(tempTodo));
   };
 
   if (isEditing) {
