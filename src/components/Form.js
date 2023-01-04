@@ -15,14 +15,14 @@ const Form = React.memo(({ todoValue, setTodoValue, addTodoSubmit }) => {
         <input
           type="text"
           placeholder="할 일을 입력하세요"
-          className="w-full px-3 py-2 mr-4 text-gray-500 border rounded shadow"
+          className="w-full px-3 py-2 mr-4 text-gray-500 border rounded shadow outline-none"
           value={todoValue}
           onChange={changeTodoValue}
         />
         <input
           type="submit"
-          value={"등록"}
-          className="p-2 text-green-400 border-2 border-green-400 rounded hover:text-white hover:bg-green-400"
+          value="추가"
+          className="p-2 border rounded hover:text-white hover:bg-gray-400 w-1/12 shadow"
         />
       </form>
     </>

@@ -132,10 +132,12 @@ const Todo = () => {
 
   return (
     <div className="flex justify-center w-full ">
-      <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-5xl">
+      <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4">
         <div className="flex justify-between mb-3">
-          <h1>할일 목록</h1>
-          <button onClick={deleteAllClick}>Delete All</button>
+          <h2>할일 목록</h2>
+          <button onClick={deleteAllClick} className="hover:text-red-500">
+            Delete All
+          </button>
         </div>
         <List
           todoData={todoData}
